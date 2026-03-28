@@ -418,9 +418,9 @@ df.center_point_geom.value_counts()
 <p>Using the <code>value_counts()</code> function again but only to output the top 20 results, rename the columns and apply a color gradient</p>
 <details><summary>View Code</summary><pre>
 # Top 20
-df.center_point_geom.value_counts()[:20] \
-    .rename_axis('unique_values') \
-    .reset_index(name='counts') \
+df.center_point_geom.value_counts()[:20]
+    .rename_axis('unique_values')
+    .reset_index(name='counts')
     .style.background_gradient()
 </pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
