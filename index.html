@@ -264,6 +264,14 @@ body.light-mode .data-table tr:nth-child(even) {
   background: #f9f9f9;
 }
 
+
+/* GRADIENT SCALE */
+.g10 { background:#0b3c5d; color:#fff; }
+.g9  { background:#145a7a; color:#fff; }
+.g8  { background:#1f77a4; color:#fff; }
+.g7  { background:#3a8fb7; }
+.g6  { background:#6baed6; }
+
 </style>
 </head>
 
@@ -402,7 +410,30 @@ df.drop_duplicates().shape
 # Sort by numbr of strikes (descending)
 df.sort_values(by='number_of_strikes', ascending=False).head(10)
 </pre></details>
-<div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
+
+<div class="results">
+<strong>Results:</strong>
+<table class="data-table">
+<thead>
+<tr>
+<th>index</th><th>date</th><th>number_of_strikes</th><th>center_point_geom</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>302758</td><td>2018-08-20</td><td>2211</td><td>POINT(-92.5 35.5)</td></tr>
+<tr><td>278383</td><td>2018-08-16</td><td>2142</td><td>POINT(-96.1 36.1)</td></tr>
+<tr><td>280830</td><td>2018-08-17</td><td>2061</td><td>POINT(-90.2 36.1)</td></tr>
+<tr><td>280453</td><td>2018-08-17</td><td>2031</td><td>POINT(-89.9 35.9)</td></tr>
+<tr><td>278382</td><td>2018-08-16</td><td>1902</td><td>POINT(-96.2 36.1)</td></tr>
+<tr><td>11517</td><td>2018-02-10</td><td>1899</td><td>POINT(-95.5 28.1)</td></tr>
+<tr><td>277506</td><td>2018-08-16</td><td>1878</td><td>POINT(-89.7 31.5)</td></tr>
+<tr><td>24906</td><td>2018-02-25</td><td>1833</td><td>POINT(-98.7 28.9)</td></tr>
+<tr><td>284320</td><td>2018-08-17</td><td>1767</td><td>POINT(-90.1 36)</td></tr>
+<tr><td>24825</td><td>2018-02-25</td><td>1741</td><td>POINT(-98 29)</td></tr>
+</tbody>
+</table>
+</div>
+
 
 <!-- ADDITIONAL SET 1 -->
 <p>To get the locations with the most days with at least one lightning strike, the <code>value_counts()</code> function is used on the <code>center_point_geom</code> column.</p>
@@ -412,7 +443,27 @@ df.sort_values(by='number_of_strikes', ascending=False).head(10)
 # Locations appearing most in the dataset
 df.center_point_geom.value_counts()
 </pre></details>
-<div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
+
+<div class="results">
+<strong>Results:</strong>
+<table class="data-table">
+<thead>
+<tr><th>center_point_geom</th><th>count</th></tr>
+</thead>
+<tbody>
+<tr><td>POINT(-81.5 22.5)</td><td>108</td></tr>
+<tr><td>POINT(-84.1 22.4)</td><td>108</td></tr>
+<tr><td>POINT(-82.7 22.9)</td><td>107</td></tr>
+<tr><td>POINT(-82.5 22.9)</td><td>107</td></tr>
+<tr><td>POINT(-84.2 22.3)</td><td>106</td></tr>
+<tr><td colspan="2">...</td></tr>
+<tr><td>POINT(-130.2 47.4)</td><td>1</td></tr>
+<tr><td>POINT(-60.4 44.5)</td><td>1</td></tr>
+</tbody>
+</table>
+<p style="font-size:0.85rem; opacity:0.7;">Showing truncated results (full dataset contains 170,855 rows)</p>
+</div>
+
 
 <!-- ADDITIONAL SET 2 -->
 <p>Using the <code>value_counts()</code> function again but only to output the top 20 results, rename the columns and apply a color gradient</p>
@@ -423,7 +474,28 @@ df.center_point_geom.value_counts()[:20]
     .reset_index(name='counts')
     .style.background_gradient()
 </pre></details>
-<div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
+
+<div class="results">
+<strong>Results:</strong>
+<table class="data-table gradient-table">
+<thead>
+<tr><th>#</th><th>unique_values</th><th>counts</th></tr>
+</thead>
+<tbody>
+<tr><td>0</td><td>POINT(-81.5 22.5)</td><td class="g10">108</td></tr>
+<tr><td>1</td><td>POINT(-84.1 22.4)</td><td class="g10">108</td></tr>
+<tr><td>2</td><td>POINT(-82.7 22.9)</td><td class="g9">107</td></tr>
+<tr><td>3</td><td>POINT(-82.5 22.9)</td><td class="g9">107</td></tr>
+<tr><td>4</td><td>POINT(-84.2 22.3)</td><td class="g8">106</td></tr>
+<tr><td>5</td><td>POINT(-82.5 22.8)</td><td class="g8">106</td></tr>
+<tr><td>6</td><td>POINT(-76 20.5)</td><td class="g7">105</td></tr>
+<tr><td>7</td><td>POINT(-75.9 20.4)</td><td class="g7">105</td></tr>
+<tr><td>8</td><td>POINT(-82.2 22.9)</td><td class="g6">104</td></tr>
+<tr><td>9</td><td>POINT(-78 18.2)</td><td class="g6">104</td></tr>
+</tbody>
+</table>
+</div>
+
 
 </div>
 </div>
