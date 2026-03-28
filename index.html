@@ -363,7 +363,7 @@ body.light-mode .scroll-box::-webkit-scrollbar-thumb {
 <div class="subsection-content">
 <p>For this project, two datasets will be used: A smaller file containing 2018 data and a larger file containing 2016-2017 data. The smaller file can be found in the Github repo (linked above) while the larger one was not permitted due to file size restrictions. Converting to Parquet and zip methods did not pan out either unfortunately. As with other projects, I can truncate part of the second dataset for demonstrative purposes though the results will differ.</p>
 <p><code>lightning_strikes_dataset_1.csv</code> is loaded first along with necessary packages and libraries</p>
-<<details><summary>View Code</summary><pre>
+<details><summary>View Code</summary><pre>
 # Import
 import pandas as pd
 import numpy as np
@@ -399,7 +399,7 @@ df.head()
 
 <p>Similar to other projects, this dataset has three columns <code>date</code>, <code>number_of_strikes</code> and <code>center_point_geom</code>. The <code>date</code> column will be converted into a usable datetime format. <code>df.info()</code> can be used to confirm conversion success after checking data types.</p>
 <p><code>.shape</code> to run a quick check on the shape of the dataset followed by dropping duplicate rows with <code>.drop_duplicates().shape</code>, if present, and seeing if they both match. Since both appear to be matching, it is established that there is at most one row for each date, area and number of strikes.</p>
-<<details><summary>View Code</summary><pre>
+<details><summary>View Code</summary><pre>
 # Datetime conversion
 df['date'] = pd.to_datetime(df['date'])
 
@@ -430,7 +430,7 @@ df.drop_duplicates().shape
 <div class="subsection-content">
 <p>As a good launch point for this analysis, <code>.sort_values()</code> identifies the locations with the highest number of lightning strikes in a single day by descending order.</p>
 <p>This pulls on the most extreme events in the dataset to surface and provides a clear starting point for understanding where lightning strikes are most concentrated.</p>
-<<details><summary>View Code</summary><pre>
+<details><summary>View Code</summary><pre>
 # Sort by numbr of strikes (descending)
 df.sort_values(by='number_of_strikes', ascending=False).head(10)
 </pre></details>
@@ -575,7 +575,7 @@ df.head()
 
 <!-- ADDITIONAL SET 1 -->
 <p>The mean number of lightning strikes for each weekday of the year is calculated using <code>groupby()</code> to get an idea of what the distribution will look like</p>
-<<details><summary>View Code</summary><pre>
+<details><summary>View Code</summary><pre>
 # Mean number of strikes per weekday of the year
 df[['weekday', 'number_of_strikes']].groupby(['weekday']).mean()
 </pre></details>
@@ -602,7 +602,7 @@ df[['weekday', 'number_of_strikes']].groupby(['weekday']).mean()
 <!-- ADDITIONAL SET 2 -->
 <p>Interestingly, Saturday and Sunday have fewer lightning strikes on average than the other five days of the week. Pursuing this further, a box plot is made showing the distribution across weekdays.</p>
 <p>For this visualization, outliers will be ignored setting <code>showfliers</code> to <code>False</code>. The focus for this visualization will be on median values without possible skewing from outliers.</p>
-<<details><summary>View Code</summary><pre>
+<details><summary>View Code</summary><pre>
 # Define order of days (plot)
 weekday_order = ['Monday','Tuesday', 'Wednesday', 'Thursday','Friday','Saturday','Sunday']
 
@@ -638,7 +638,7 @@ g.set_title('Lightning distribution per weekday (2018)');
 <div class="subsection-header">Seasonal Trends (Multi-Year)</div>
 <div class="subsection-content">
 <p>[Text Here]</p>
-<<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<details><summary>View Code</summary><pre>[Code Here]</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 </div>
 </div>
