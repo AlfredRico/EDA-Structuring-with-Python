@@ -396,23 +396,30 @@ df.drop_duplicates().shape
 <div class="subsection">
 <div class="subsection-header">Geographic Analysis</div>
 <div class="subsection-content">
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<p>As a good launch point for this analysis, <code>.sort_values()</code> identifies the locations with the highest number of lightning strikes in a single day by descending order</p>
+<p>This pulls on the most extreme events in the dataset to surface and provides a clear starting point for understanding where lightning strikes are most concentrated.</p>
+<details><summary>View Code</summary><pre>
+# Sort by numbr of strikes (descending)
+df.sort_values(by='number_of_strikes', ascending=False).head(10)
+</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 
 <!-- ADDITIONAL SET 1 -->
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<p>To get the locations with the most days with at least one lightning strike, the <code>value_counts()</code> function is used on the <code>center_point_geom</code> column.</p>
+<p>If each row represent a day and location, then counter the number of times each location occurs in the data reveals the number of days with at least one lightning strike.</p>
+<p>By default, <code>value_counts()</code> sorts in descending order.</p>
+<details><summary>View Code</summary><pre>
+# Locations appearing most in the dataset
+df.center_point_geom.value_counts()
+</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 
 <!-- ADDITIONAL SET 2 -->
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
-<div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
-
-<!-- ADDITIONAL SET 3 -->
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<p>Using the <code>value_counts()</code> function again but only to output the top 20 results, rename the columns and apply a color gradient</p>
+<details><summary>View Code</summary><pre>
+# Top 20
+df.center_point_geom.value_counts()[:20].rename_axis('unique_values').reset_index(name='counts').style.background_gradient()
+</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 
 </div>
