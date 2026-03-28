@@ -225,6 +225,45 @@ details summary {
   transition: color 0.2s ease;
 }
 
+
+/* DATA TABLE */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+  font-size: 0.95rem;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #2a2a2a;
+  padding: 8px 10px;
+  text-align: left;
+}
+
+.data-table th {
+  background: #222;
+  font-weight: 600;
+}
+
+.data-table tr:nth-child(even) {
+  background: #161616;
+}
+
+/* LIGHT MODE TABLE */
+body.light-mode .data-table th,
+body.light-mode .data-table td {
+  border: 1px solid #ddd;
+}
+
+body.light-mode .data-table th {
+  background: #eaeaea;
+}
+
+body.light-mode .data-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
 </style>
 </head>
 
@@ -304,7 +343,28 @@ from matplotlib import pyplot as plt
 df = pd.read_csv('lightning_strikes_dataset_1.csv')
 df.head()
 </pre></details>
-<div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
+
+<div class="results">
+<strong>Results:</strong>
+
+<table class="data-table">
+<thead>
+<tr>
+<th>date</th>
+<th>number_of_strikes</th>
+<th>center_point_geom</th>
+</tr>
+</thead>
+<tbody>
+<tr><td>2018-01-03</td><td>194</td><td>POINT(-75 27)</td></tr>
+<tr><td>2018-01-03</td><td>41</td><td>POINT(-78.4 29)</td></tr>
+<tr><td>2018-01-03</td><td>33</td><td>POINT(-73.9 27)</td></tr>
+<tr><td>2018-01-03</td><td>38</td><td>POINT(-73.8 27)</td></tr>
+<tr><td>2018-01-03</td><td>92</td><td>POINT(-79 28)</td></tr>
+</tbody>
+</table>
+</div>
+
 <p>Similar to other projects, this dataset has three columns <code>date</code>, <code>number_of_strikes</code> and <code>center_point_geom</code>. The <code>date</code> column will be converted into a usable datetime format. <code>df.info()</code> can be used to confirm conversion success after checking data types.</p>
 <p><code>.shape</code> to run a quick check on the shape of the dataset followed by dropping duplicate rows with <code>.drop_duplicates().shape</code>, if present, and seeing if they both match. Since both appear to be matching, it is established that there is at most one row for each date, area and number of strikes.</p>
 <details><summary>View Code</summary><pre>
