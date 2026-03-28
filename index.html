@@ -290,8 +290,20 @@ details summary {
 <div class="subsection">
 <div class="subsection-header">Data Loading & Inspection</div>
 <div class="subsection-content">
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<p>For this project, two datasets will be used -- A smaller file containing 2018 data and a larger file containing 2016-2017 data. The smaller file can be found in the Github repo (linked above) while the larger one was not permitted due to file size restrictions. Converting to Parquet and zip methods did not pan out either unfortunately. As with other projects, I can truncate part of the second dataset for demonstrative purposes though the results will differ.</p>
+<p><code>lightning_strikes_dataset_1.csv</code> is loaded first along with necessary packages and libraries</p>
+<details><summary>View Code</summary><pre>
+# Import
+import pandas as pd
+import numpy as np
+import seaborn as sns
+import datetime
+from matplotlib import pyplot as plt
+
+# Load
+df = pd.read_csv('lightning_strikes_dataset_1.csv')
+df.head()
+</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 </div>
 </div>
