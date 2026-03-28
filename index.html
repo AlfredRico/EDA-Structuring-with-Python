@@ -574,8 +574,8 @@ df.head()
 
 
 <!-- ADDITIONAL SET 1 -->
-<p>The mean number of lightning strikes for each weekday of the year is calculated using <code>groupby()</code> to get an idea of what the distribution will look like</p>
-<<details><summary>View Code</summary><pre>
+<p>The mean number of lightning strikes for each weekday of the year is calculated using <code>groupby()</code> to get an idea of what the distribution will look like. </p>
+<details><summary>View Code</summary><pre>
 # Mean number of strikes per weekday of the year
 df[['weekday', 'number_of_strikes']].groupby(['weekday']).mean()
 </pre></details>
@@ -602,7 +602,7 @@ df[['weekday', 'number_of_strikes']].groupby(['weekday']).mean()
 <!-- ADDITIONAL SET 2 -->
 <p>Interestingly, Saturday and Sunday have fewer lightning strikes on average than the other five days of the week. Pursuing this further, a box plot is made showing the distribution across weekdays.</p>
 <p>For this visualization, outliers will be ignored setting <code>showfliers</code> to <code>False</code>. The focus for this visualization will be on median values without possible skewing from outliers.</p>
-<<details><summary>View Code</summary><pre>
+<details><summary>View Code</summary><pre>
 # Define order of days (plot)
 weekday_order = ['Monday','Tuesday', 'Wednesday', 'Thursday','Friday','Saturday','Sunday']
 
