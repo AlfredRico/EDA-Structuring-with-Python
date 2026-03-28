@@ -544,25 +544,49 @@ df.center_point_geom.value_counts()[:20]
 <div class="subsection">
 <div class="subsection-header">Temporal Analysis</div>
 <div class="subsection-content">
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<p>To find out which days of the week had higher concentrations, lightning strikes are categorized by day of the week. Using the <code>date</code> column, converted to datetime format earlier, a <code>week</code> column is extracted.</p>
+<p><code>dt.isocalendar()</code> is a function designed for use on a pandas series, returning in this case, a new dataframe with year, week, and day columns. Adding <code>.week</code> will extract only the week number for use in this phase.</p>
+<p><code>dt.day.name()</code> is also be used to create a <code>weekeday</code> column which will provide the text name of day for any given datetime formatted date (Useful for visualization).</p>
+details><summary>View Code</summary><pre>
+# Create two new columns
+df['week'] = df.date.dt.isocalendar().week
+df['weekday'] = df.date.dt.day_name()
+df.head()
+</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 
 <!-- ADDITIONAL SET 1 -->
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<p>The mean number of lightning strikes for each weekday of the year is calculated using <code>groupby()</code> to get an idea of what the distribution will look like</p>
+<details><summary>View Code</summary><pre>
+# Mean number of strikes per weekday of the year
+df[['weekday', 'number_of_strikes']].groupby(['weekday']).mean()
+</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 
 <!-- ADDITIONAL SET 2 -->
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<p>Interestingly, Saturday and Sunday have fewer lightning strikes on average than the other five days of the week. Pursuing this further, a box plot is made showing the distribution across weekdays.</p>
+<p>For this visualization, outliers will be ignored setting <code>showfliers</code> to <code>False</code>. The focus for this visualization will be on median values without possible skewing from outliers.</p>
+<details><summary>View Code</summary><pre>
+# Define order of days (plot)
+weekday_order = ['Monday','Tuesday', 'Wednesday', 'Thursday','Friday','Saturday','Sunday']
+
+# Plot
+g = sns.boxplot(data=df,
+                x='weekday',
+                y='number_of_strikes',
+                order=weekday_order,
+                showfliers=False
+               );
+g.set_title('Lightning distribution per weekday (2018)');
+</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 
 </div>
 </div>
 <div class="subsection-summary">
 <div class="summary-header">Summary</div>
-<div class="summary-content"><p>[Text Here]</p></div>
+<div class="summary-content"><p>Although the boxplot further highlights a lower average lightning count for Saturday and Sunday, the median remains consistent across all days, suggesting no meaningful shift in typical activity. It appears that the difference in averages could likely be driven by sampling or temporal effects. This is consistent with what <code>df.center_point_geom.value_counts()</code> highlights in that most activity seems to be clustered close in proximity.</p></div>
+<p>There appears to be an aerosol theory going around that less traffic, less people at work, and less industrial release have a causal effect. I doubt it.</p>
 </div>
 
 <!-- SECTION 4 -->
