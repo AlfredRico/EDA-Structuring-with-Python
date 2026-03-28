@@ -778,7 +778,7 @@ percentage_lightning.head()
 
 
 <!-- ADDITIONAL SET 7 -->
-<p>To get the percentage of total lightning strikes that occurred during each month, the <code>number_of_strikes</code> column is divided by the <code>year_strikes</code> column and multiplying by 100.</p>
+<p>To get the percentage of total lightning strikes that occurred during each month, the <code>number_of_strikes</code> column is divided by the <code>year_strikes</code> column and multiplied by 100.</p>
 <details><summary>View Code</summary><pre>
 percentage_lightning['percentage_lightning_per_month'] = (percentage_lightning.number_of_strikes/
                                                           percentage_lightning.year_strikes * 100.0)
