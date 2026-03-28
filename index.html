@@ -892,6 +892,9 @@ g.set_title('Lightning distribution per weekday (2018)');
 # Load dataset
 df_2 = pd.read_csv('lightning_strikes_dataset_2.csv')
 
+# Datetime conversion
+df_2['date'] = pd.to_datetime(df_2['date'])
+
 df_2.head()
 </pre></details>
 
