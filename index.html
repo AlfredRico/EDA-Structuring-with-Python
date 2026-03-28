@@ -305,7 +305,7 @@ df = pd.read_csv('lightning_strikes_dataset_1.csv')
 df.head()
 </pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
-<p>Similar to other projects, this dataset has three columns <code>date</code>, <code>number_of_strikes</code> and <code>center_point_geom</code>. the <code>date</code> column will be converted into a usable datetime format.</p>
+<p>Similar to other projects, this dataset has three columns <code>date</code>, <code>number_of_strikes</code> and <code>center_point_geom</code>. The <code>date</code> column will be converted into a usable datetime format.</p>
 <p><code>.shape</code> to run a quick check on the shape of the dataset followed by dropping duplicate rows with <code>.drop_duplicates().shape</code>, if present, and seeing if they both match. Since both appear to be matching, it is established that there is at most one row for each date, area and number of strikes.</p>
 <details><summary>View Code</summary><pre>
 # Datetime conversion
