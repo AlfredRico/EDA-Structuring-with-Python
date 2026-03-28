@@ -272,6 +272,30 @@ body.light-mode .data-table tr:nth-child(even) {
 .g7  { background:#3a8fb7; }
 .g6  { background:#6baed6; }
 
+
+/* SCROLLABLE RESULTS */
+.scroll-box {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.scroll-box::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroll-box::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+body.light-mode .scroll-box::-webkit-scrollbar-thumb {
+  background: #bbb;
+}
+
+/* EXTENDED GRADIENT */
+.g5 { background:#9ecae1; }
+.g4 { background:#c6dbef; }
+
 </style>
 </head>
 
@@ -475,7 +499,7 @@ df.center_point_geom.value_counts()[:20]
     .style.background_gradient()
 </pre></details>
 
-<div class="results">
+<div class="results scroll-box">
 <strong>Results:</strong>
 <table class="data-table gradient-table">
 <thead>
@@ -492,6 +516,16 @@ df.center_point_geom.value_counts()[:20]
 <tr><td>7</td><td>POINT(-75.9 20.4)</td><td class="g7">105</td></tr>
 <tr><td>8</td><td>POINT(-82.2 22.9)</td><td class="g6">104</td></tr>
 <tr><td>9</td><td>POINT(-78 18.2)</td><td class="g6">104</td></tr>
+<tr><td>10</td><td>POINT(-83.9 22.5)</td><td class="g5">103</td></tr>
+<tr><td>11</td><td>POINT(-78 18.3)</td><td class="g5">102</td></tr>
+<tr><td>12</td><td>POINT(-82 22.4)</td><td class="g5">102</td></tr>
+<tr><td>13</td><td>POINT(-82 22.8)</td><td class="g5">102</td></tr>
+<tr><td>14</td><td>POINT(-82.3 22.9)</td><td class="g5">102</td></tr>
+<tr><td>15</td><td>POINT(-84 22.4)</td><td class="g5">102</td></tr>
+<tr><td>16</td><td>POINT(-75.5 20.6)</td><td class="g4">101</td></tr>
+<tr><td>17</td><td>POINT(-82 22.3)</td><td class="g4">101</td></tr>
+<tr><td>18</td><td>POINT(-78.2 18.3)</td><td class="g4">101</td></tr>
+<tr><td>19</td><td>POINT(-84 22.5)</td><td class="g4">101</td></tr>
 </tbody>
 </table>
 </div>
