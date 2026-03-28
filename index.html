@@ -298,83 +298,52 @@ body.light-mode .scroll-box::-webkit-scrollbar-thumb {
 
 
 /* =========================
-   GLOBAL READABILITY IMPROVEMENTS
-   (SAFE - NO STRUCTURAL CHANGE)
+   DESKTOP READABILITY ONLY
 ========================= */
+@media (min-width: 1024px) {
 
-/* Improve text readability */
-body {
-  line-height: 1.7;
-}
+  body {
+    line-height: 1.7;
+  }
 
-/* Better reading width */
-.container {
-  max-width: 1000px;
-}
+  .container {
+    max-width: 1000px;
+  }
 
-/* Headings breathing room */
-h1 {
-  line-height: 1.2;
-  margin-bottom: 12px;
-}
+  h2 {
+    margin-top: 60px;
+    margin-bottom: 14px;
+  }
 
-h2 {
-  margin-top: 60px;
-  margin-bottom: 14px;
-}
+  p {
+    margin-bottom: 14px;
+  }
 
-/* Paragraph spacing */
-p {
-  margin-bottom: 14px;
-}
+  .section {
+    margin-top: 40px;
+  }
 
-/* Section spacing */
-.section {
-  margin-top: 40px;
-}
+  .results {
+    padding: 16px;
+    margin-top: 18px;
+  }
 
-/* Subsection spacing */
-.subsection-content p {
-  margin-bottom: 12px;
-}
+  .data-table td,
+  .data-table th {
+    padding: 10px 12px;
+  }
 
-/* Code block readability */
-pre {
-  padding: 12px;
-  border-radius: 6px;
-  overflow-x: auto;
-  line-height: 1.5;
-}
+  pre {
+    padding: 12px;
+    line-height: 1.5;
+    overflow-x: auto;
+  }
 
-/* Table readability */
-.data-table td,
-.data-table th {
-  padding: 10px 12px;
-}
-
-/* Results spacing */
-.results {
-  margin-top: 18px;
-  padding: 16px;
-}
-
-/* Details spacing */
-details {
-  padding: 12px;
-}
-
-/* Improve visual hierarchy slightly */
-.subsection-header {
-  margin-top: 18px;
-}
-
-.summary-content {
-  margin-top: 6px;
 }
 
 
 /* =========================
-   MOBILE OPTIMIZATION (ISOLATED)
+   MOBILE ONLY (ISOLATED)
 ========================= */
 @media (max-width: 768px) {
 
@@ -411,27 +380,17 @@ details {
     margin-left: 28px;
   }
 
-  /* Remove deep nesting offset */
+  /* Fix nesting drift */
   .subsection {
     margin-left: 0;
     padding-left: 6px;
     border-left: none;
   }
 
-  /* Stack controls */
-  .controls {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 8px;
-  }
+  /* IMPORTANT: DO NOT TOUCH CONTROLS */
+  /* No changes to .controls or buttons */
 
-  .controls button {
-    width: 100%;
-    padding: 10px;
-    font-size: 0.95rem;
-  }
-
-  /* Table fix */
+  /* Table overflow fix */
   .results {
     overflow-x: auto;
   }
@@ -441,13 +400,12 @@ details {
     font-size: 0.85rem;
   }
 
-  /* Images responsive */
+  /* Images */
   img {
     width: 100% !important;
     height: auto;
   }
 
-  /* Reduce padding for tighter fit */
   .results,
   details {
     padding: 10px;
