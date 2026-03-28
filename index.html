@@ -637,48 +637,108 @@ g.set_title('Lightning distribution per weekday (2018)');
 <div class="subsection">
 <div class="subsection-header">Seasonal Trends (Multi-Year)</div>
 <div class="subsection-content">
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<p>To calculate monthly lightning strikes from 2016-2018, the second structured dataset is used, calculating percentages of total lightning strikes that occurred for each year in a given month.</p>
+<p>Like the first dataset, the <code>date</code> column needs to be converted.</p>
+<details><summary>View Code</summary><pre>
+# Load dataset
+df_2 = pd.read_csv('lightning_strikes_dataset_2.csv')
+
+df_2.head()
+</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 
 <!-- ADDITIONAL SET 1 -->
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<p>The 2016-2017 dataframe is combined with the 2018 dataframe using <code>concat()</code> so that data can be aggregated across all years.</p>
+<p>The <code>week</code> and <code>weekday</code> columns that were created earlier are dropped for this operation only to simplify the results.</p>
+<details><summary>View Code</summary><pre>
+# Create new 2016-2018 dataframe
+union_df = pd.concat([df.drop(['weekday', 'week'], axis=1), df_2], ignore_index=True)
+union_df.head()
+</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 
 <!-- ADDITIONAL SET 2 -->
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<p>Three new columns need to be created, year, month number, and month name, to assist with name bars on the bar plot.</p>
+<details><summary>View Code</summary><pre>
+# Add 3 new columns
+union_df['year'] = union_df.date.dt.year
+union_df['month'] = union_df.date.dt.month
+union_df['month_txt'] = union_df.date.dt.month_name()
+union_df.head() 
+</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 
 <!-- ADDITIONAL SET 3 -->
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<p>With this new dataframe, the total number of strikes per year can be called</p>
+<details><summary>View Code</summary><pre>
+union_df[['year', 'number_of_strikes']].groupby(['year']).sum()
+</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 
 <!-- ADDITIONAL SET 4 -->
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<p>A new dataframe is created called <code>lightning_by_month</code> highlighting percentages of total lightning strikes that occurred in a given month for each year.</p>
+<p>To avoid any future errors with <code>agg()</code> we pass <code>sum</code> as a string since that is what Pandas expects for built-ins (sum, mean, max etc.)</p>
+<details><summary>View Code</summary><pre>
+# Lightning by month
+lightning_by_month = union_df.groupby(['month_txt', 'year']).agg(
+    number_of_strikes = pd.NamedAgg(column = 'number_of_strikes', aggfunc='sum')
+    ).reset_index()
+
+lightning_by_month.head()
+</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 
 <!-- ADDITIONAL SET 5 -->
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<p>With the monthly total strike count in hand, <code>agg()</code> is used to calculate the same yearly totals from before into a dataframe that can be merged downstream.</p>
+<details><summary>View Code</summary><pre>
+# lightning by year
+lightning_by_year = union_df.groupby(['year']).agg(
+    year_strikes = pd.NamedAgg(column='number_of_strikes', aggfunc='sum')
+).reset_index()
+
+lightning_by_year.head()
+</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 
 <!-- ADDITIONAL SET 6 -->
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<p>With both <code>lightning_by_month</code> and <code>lightning_by_year</code>, a new dataframe called <code>percentage_lightning</code> can be created.</p>
+<p><code>merge()</code> offers this capability by merging both <code>lightning_by_month</code> and <code>lightning_by_year</code> into a single dataframe, specifying the merge on the <code>year</code> column. Wherever <code>year</code> contains the same value in both dataframes, a row is created in the merged dataframe with all other columns.</p>
+<p><code>percentage_lightning</code> will add a new column called <code>year_strikes</code> representing total number of strikes for each year.</p>
+<details><summary>View Code</summary><pre>
+# Combine
+percentage_lightning = lightning_by_month.merge(lightning_by_year, on='year')
+percentage_lightning.head()
+</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 
 <!-- ADDITIONAL SET 7 -->
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<p>To get the percentage of total lightning strikes that occurred during each month, the <code>number_of_strikes</code> column is divided by the <code>year_strikes</code> column and multiplying by 100.</p>
+<details><summary>View Code</summary><pre>
+percentage_lightning['percentage_lightning_per_month'] = (percentage_lightning.number_of_strikes/
+                                                          percentage_lightning.year_strikes * 100.0)
+percentage_lightning.head()
+</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 
 <!-- ADDITIONAL SET 8 -->
-<p>[Text Here]</p>
-<details><summary>View Code</summary><pre>[Code Here]</pre></details>
+<p>Now the percentages by month for each year can be plotted</p>
+<details><summary>View Code</summary><pre>
+# Plot
+plt.figure(figsize=(10,6));
+
+month_order = ['January', 'February', 'March', 'April', 'May', 'June', 
+               'July', 'August', 'September', 'October', 'November', 'December']
+
+sns.barplot(
+    data = percentage_lightning,
+    x = 'month_txt',
+    y = 'percentage_lightning_per_month',
+    hue = 'year',
+    order = month_order );
+plt.xlabel("Month");
+plt.ylabel("% of lightning strikes");
+plt.title("% of lightning strikes each Month (2016-2018)");
+</pre></details>
 <div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
 
 </div>
