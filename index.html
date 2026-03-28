@@ -645,7 +645,17 @@ df_2 = pd.read_csv('lightning_strikes_dataset_2.csv')
 
 df_2.head()
 </pre></details>
-<div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
+
+<div class="results"><strong>Results:</strong>
+<table class="data-table">
+<tr><th>date</th><th>number_of_strikes</th><th>center_point_geom</th></tr>
+<tr><td>2016-01-04</td><td>55</td><td>POINT(-83.2 21.1)</td></tr>
+<tr><td>2016-01-04</td><td>33</td><td>POINT(-83.1 21.1)</td></tr>
+<tr><td>2016-01-05</td><td>46</td><td>POINT(-77.5 22.1)</td></tr>
+<tr><td>2016-01-05</td><td>28</td><td>POINT(-76.8 22.3)</td></tr>
+<tr><td>2016-01-05</td><td>28</td><td>POINT(-77 22.1)</td></tr>
+</table></div>
+
 
 <!-- ADDITIONAL SET 1 -->
 <p>The 2016-2017 dataframe is combined with the 2018 dataframe using <code>concat()</code> so that data can be aggregated across all years.</p>
@@ -655,7 +665,17 @@ df_2.head()
 union_df = pd.concat([df.drop(['weekday', 'week'], axis=1), df_2], ignore_index=True)
 union_df.head()
 </pre></details>
-<div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
+
+<div class="results"><strong>Results:</strong>
+<table class="data-table">
+<tr><th>date</th><th>number_of_strikes</th><th>center_point_geom</th></tr>
+<tr><td>2018-01-03</td><td>194</td><td>POINT(-75 27)</td></tr>
+<tr><td>2018-01-03</td><td>41</td><td>POINT(-78.4 29)</td></tr>
+<tr><td>2018-01-03</td><td>33</td><td>POINT(-73.9 27)</td></tr>
+<tr><td>2018-01-03</td><td>38</td><td>POINT(-73.8 27)</td></tr>
+<tr><td>2018-01-03</td><td>92</td><td>POINT(-79 28)</td></tr>
+</table></div>
+
 
 <!-- ADDITIONAL SET 2 -->
 <p>Three new columns need to be created, year, month number, and month name, to assist with name bars on the bar plot.</p>
@@ -666,14 +686,32 @@ union_df['month'] = union_df.date.dt.month
 union_df['month_txt'] = union_df.date.dt.month_name()
 union_df.head() 
 </pre></details>
-<div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
+
+<div class="results"><strong>Results:</strong>
+<table class="data-table">
+<tr><th>date</th><th>number_of_strikes</th><th>center_point_geom</th><th>year</th><th>month</th><th>month_txt</th></tr>
+<tr><td>2018-01-03</td><td>194</td><td>POINT(-75 27)</td><td>2018</td><td>1</td><td>January</td></tr>
+<tr><td>2018-01-03</td><td>41</td><td>POINT(-78.4 29)</td><td>2018</td><td>1</td><td>January</td></tr>
+<tr><td>2018-01-03</td><td>33</td><td>POINT(-73.9 27)</td><td>2018</td><td>1</td><td>January</td></tr>
+<tr><td>2018-01-03</td><td>38</td><td>POINT(-73.8 27)</td><td>2018</td><td>1</td><td>January</td></tr>
+<tr><td>2018-01-03</td><td>92</td><td>POINT(-79 28)</td><td>2018</td><td>1</td><td>January</td></tr>
+</table></div>
+
 
 <!-- ADDITIONAL SET 3 -->
 <p>With this new dataframe, the total number of strikes per year can be called</p>
 <details><summary>View Code</summary><pre>
 union_df[['year', 'number_of_strikes']].groupby(['year']).sum()
 </pre></details>
-<div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
+
+<div class="results"><strong>Results:</strong>
+<table class="data-table">
+<tr><th>year</th><th>number_of_strikes</th></tr>
+<tr><td>2016</td><td>41582229</td></tr>
+<tr><td>2017</td><td>35095195</td></tr>
+<tr><td>2018</td><td>44600989</td></tr>
+</table></div>
+
 
 <!-- ADDITIONAL SET 4 -->
 <p>A new dataframe is created called <code>lightning_by_month</code> highlighting percentages of total lightning strikes that occurred in a given month for each year.</p>
@@ -686,7 +724,17 @@ lightning_by_month = union_df.groupby(['month_txt', 'year']).agg(
 
 lightning_by_month.head()
 </pre></details>
-<div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
+
+<div class="results"><strong>Results:</strong>
+<table class="data-table">
+<tr><th>month_txt</th><th>year</th><th>number_of_strikes</th></tr>
+<tr><td>April</td><td>2016</td><td>2636427</td></tr>
+<tr><td>April</td><td>2017</td><td>3819075</td></tr>
+<tr><td>April</td><td>2018</td><td>1524339</td></tr>
+<tr><td>August</td><td>2016</td><td>7250442</td></tr>
+<tr><td>August</td><td>2017</td><td>6021702</td></tr>
+</table></div>
+
 
 <!-- ADDITIONAL SET 5 -->
 <p>With the monthly total strike count in hand, <code>agg()</code> is used to calculate the same yearly totals from before into a dataframe that can be merged downstream.</p>
@@ -698,7 +746,15 @@ lightning_by_year = union_df.groupby(['year']).agg(
 
 lightning_by_year.head()
 </pre></details>
-<div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
+
+<div class="results"><strong>Results:</strong>
+<table class="data-table">
+<tr><th>year</th><th>year_strikes</th></tr>
+<tr><td>2016</td><td>41582229</td></tr>
+<tr><td>2017</td><td>35095195</td></tr>
+<tr><td>2018</td><td>44600989</td></tr>
+</table></div>
+
 
 <!-- ADDITIONAL SET 6 -->
 <p>With both <code>lightning_by_month</code> and <code>lightning_by_year</code>, a new dataframe called <code>percentage_lightning</code> can be created.</p>
@@ -709,7 +765,17 @@ lightning_by_year.head()
 percentage_lightning = lightning_by_month.merge(lightning_by_year, on='year')
 percentage_lightning.head()
 </pre></details>
-<div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
+
+<div class="results"><strong>Results:</strong>
+<table class="data-table">
+<tr><th>month_txt</th><th>year</th><th>number_of_strikes</th><th>year_strikes</th></tr>
+<tr><td>April</td><td>2016</td><td>2636427</td><td>41582229</td></tr>
+<tr><td>April</td><td>2017</td><td>3819075</td><td>35095195</td></tr>
+<tr><td>April</td><td>2018</td><td>1524339</td><td>44600989</td></tr>
+<tr><td>August</td><td>2016</td><td>7250442</td><td>41582229</td></tr>
+<tr><td>August</td><td>2017</td><td>6021702</td><td>35095195</td></tr>
+</table></div>
+
 
 <!-- ADDITIONAL SET 7 -->
 <p>To get the percentage of total lightning strikes that occurred during each month, the <code>number_of_strikes</code> column is divided by the <code>year_strikes</code> column and multiplying by 100.</p>
@@ -718,7 +784,17 @@ percentage_lightning['percentage_lightning_per_month'] = (percentage_lightning.n
                                                           percentage_lightning.year_strikes * 100.0)
 percentage_lightning.head()
 </pre></details>
-<div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
+
+<div class="results"><strong>Results:</strong>
+<table class="data-table">
+<tr><th>month_txt</th><th>year</th><th>number_of_strikes</th><th>year_strikes</th><th>percentage_lightning_per_month</th></tr>
+<tr><td>April</td><td>2016</td><td>2636427</td><td>41582229</td><td>6.340273</td></tr>
+<tr><td>April</td><td>2017</td><td>3819075</td><td>35095195</td><td>10.882045</td></tr>
+<tr><td>April</td><td>2018</td><td>1524339</td><td>44600989</td><td>3.417725</td></tr>
+<tr><td>August</td><td>2016</td><td>7250442</td><td>41582229</td><td>17.436396</td></tr>
+<tr><td>August</td><td>2017</td><td>6021702</td><td>35095195</td><td>17.158195</td></tr>
+</table></div>
+
 
 <!-- ADDITIONAL SET 8 -->
 <p>Now the percentages by month for each year can be plotted</p>
@@ -739,7 +815,14 @@ plt.xlabel("Month");
 plt.ylabel("% of lightning strikes");
 plt.title("% of lightning strikes each Month (2016-2018)");
 </pre></details>
-<div class="results"><strong>Results:</strong><p>[Results Here]</p></div>
+
+<div class="results">
+<strong>Results:</strong>
+<div style="display:flex; justify-content:center;">
+<img src="%_lightning_strikes.png" style="width:75%; max-width:700px; border-radius:8px; margin-top:10px;">
+</div>
+</div>
+
 
 </div>
 </div>
