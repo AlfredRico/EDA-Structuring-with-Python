@@ -329,7 +329,7 @@ body.light-mode .data-table tr:nth-child(even) {
 <div class="subsection">
 <div class="subsection-header">Data Loading & Inspection</div>
 <div class="subsection-content">
-<p>For this project, two datasets will be used -- A smaller file containing 2018 data and a larger file containing 2016-2017 data. The smaller file can be found in the Github repo (linked above) while the larger one was not permitted due to file size restrictions. Converting to Parquet and zip methods did not pan out either unfortunately. As with other projects, I can truncate part of the second dataset for demonstrative purposes though the results will differ.</p>
+<p>For this project, two datasets will be used: A smaller file containing 2018 data and a larger file containing 2016-2017 data. The smaller file can be found in the Github repo (linked above) while the larger one was not permitted due to file size restrictions. Converting to Parquet and zip methods did not pan out either unfortunately. As with other projects, I can truncate part of the second dataset for demonstrative purposes though the results will differ.</p>
 <p><code>lightning_strikes_dataset_1.csv</code> is loaded first along with necessary packages and libraries</p>
 <details><summary>View Code</summary><pre>
 # Import
@@ -396,7 +396,7 @@ df.drop_duplicates().shape
 <div class="subsection">
 <div class="subsection-header">Geographic Analysis</div>
 <div class="subsection-content">
-<p>As a good launch point for this analysis, <code>.sort_values()</code> identifies the locations with the highest number of lightning strikes in a single day by descending order</p>
+<p>As a good launch point for this analysis, <code>.sort_values()</code> identifies the locations with the highest number of lightning strikes in a single day by descending order.</p>
 <p>This pulls on the most extreme events in the dataset to surface and provides a clear starting point for understanding where lightning strikes are most concentrated.</p>
 <details><summary>View Code</summary><pre>
 # Sort by numbr of strikes (descending)
