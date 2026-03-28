@@ -462,7 +462,7 @@ df.sort_values(by='number_of_strikes', ascending=False).head(10)
 <!-- ADDITIONAL SET 1 -->
 <p>To get the locations with the most days with at least one lightning strike, the <code>value_counts()</code> function is used on the <code>center_point_geom</code> column.</p>
 <p>If each row represent a day and location, then counting the number of times each location occurs in the data reveals the number of days with at least one lightning strike.</p>
-<p>By default, <code>value_counts()</code> sorts in descending order.</p>
+<p>By default, <code>value_counts()</code> sorts in descending order revealing an interesting trend between activity and geographical proximity.</p>
 <details><summary>View Code</summary><pre>
 # Locations appearing most in the dataset
 df.center_point_geom.value_counts()
@@ -535,7 +535,9 @@ df.center_point_geom.value_counts()[:20]
 </div>
 <div class="subsection-summary">
 <div class="summary-header">Summary</div>
-<div class="summary-content"><p>The analysis begins by identifying the locations with the highest number of lightning strikes in a single day, which surfaces the most extreme events and provides a clear starting point for understanding geographic concentration. From there, frequency is examined by counting how often each location appears in the dataset, revealing which areas experience lightning most consistently over time. Focusing on the top locations and applying a gradient helps highlight relative intensity, making it easier to compare and identify areas with the highest overall lightning activity.</p></div>
+<div class="summary-content"><p>The analysis begins by identifying the locations with the highest number of lightning strikes in a single day, which surfaces the most extreme events and provides a clear starting point for understanding geographic concentration. From there, frequency is examined by counting how often each location appears in the dataset, revealing which areas experience lightning most consistently over time. Focusing on the top locations and applying a gradient helps highlight relative intensity, making it easier to compare and identify areas with the highest overall lightning activity.</p>
+<p>A key takeaway is that lightning activity appears to be geographically clustered, with the highest frequency locations occurring in close proximity, suggesting concentrated regions of recurring lightning events rather than a even distribution.</p>
+</div>
 </div>
 
 <!-- SECTION 3 -->
