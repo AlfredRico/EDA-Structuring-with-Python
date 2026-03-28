@@ -967,7 +967,7 @@ union_df[['year', 'number_of_strikes']].groupby(['year']).sum()
 
 <!-- ADDITIONAL SET 4 -->
 <p>A new dataframe is created called <code>lightning_by_month</code> highlighting percentages of total lightning strikes that occurred in a given month for each year.</p>
-<p>To avoid any future errors with <code>agg()</code> we pass <code>sum</code> as a string since that is what Pandas expects for built-ins (sum, mean, max etc.)</p>
+<p>To avoid any future errors with <code>agg()</code>, <code>sum</code> is passed as a string since that is what Pandas expects for built-ins (sum, mean, max etc.)</p>
 <details><summary>View Code</summary><pre>
 # Lightning by month
 lightning_by_month = union_df.groupby(['month_txt', 'year']).agg(
