@@ -296,6 +296,165 @@ body.light-mode .scroll-box::-webkit-scrollbar-thumb {
 .g5 { background:#9ecae1; }
 .g4 { background:#c6dbef; }
 
+
+/* =========================
+   GLOBAL READABILITY IMPROVEMENTS
+   (SAFE - NO STRUCTURAL CHANGE)
+========================= */
+
+/* Improve text readability */
+body {
+  line-height: 1.7;
+}
+
+/* Better reading width */
+.container {
+  max-width: 1000px;
+}
+
+/* Headings breathing room */
+h1 {
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+
+h2 {
+  margin-top: 60px;
+  margin-bottom: 14px;
+}
+
+/* Paragraph spacing */
+p {
+  margin-bottom: 14px;
+}
+
+/* Section spacing */
+.section {
+  margin-top: 40px;
+}
+
+/* Subsection spacing */
+.subsection-content p {
+  margin-bottom: 12px;
+}
+
+/* Code block readability */
+pre {
+  padding: 12px;
+  border-radius: 6px;
+  overflow-x: auto;
+  line-height: 1.5;
+}
+
+/* Table readability */
+.data-table td,
+.data-table th {
+  padding: 10px 12px;
+}
+
+/* Results spacing */
+.results {
+  margin-top: 18px;
+  padding: 16px;
+}
+
+/* Details spacing */
+details {
+  padding: 12px;
+}
+
+/* Improve visual hierarchy slightly */
+.subsection-header {
+  margin-top: 18px;
+}
+
+.summary-content {
+  margin-top: 6px;
+}
+
+
+/* =========================
+   MOBILE OPTIMIZATION (ISOLATED)
+========================= */
+@media (max-width: 768px) {
+
+  body {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .container {
+    padding: 20px 12px;
+  }
+
+  h1 {
+    font-size: 1.9rem;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+    margin-top: 30px;
+    padding-left: 18px;
+  }
+
+  .subsection-header {
+    font-size: 1.05rem;
+    padding-left: 18px;
+  }
+
+  .summary-header {
+    font-size: 0.95rem;
+    padding-left: 28px;
+  }
+
+  .summary-content {
+    margin-left: 28px;
+  }
+
+  /* Remove deep nesting offset */
+  .subsection {
+    margin-left: 0;
+    padding-left: 6px;
+    border-left: none;
+  }
+
+  /* Stack controls */
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .controls button {
+    width: 100%;
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  /* Table fix */
+  .results {
+    overflow-x: auto;
+  }
+
+  .data-table {
+    min-width: 600px;
+    font-size: 0.85rem;
+  }
+
+  /* Images responsive */
+  img {
+    width: 100% !important;
+    height: auto;
+  }
+
+  /* Reduce padding for tighter fit */
+  .results,
+  details {
+    padding: 10px;
+  }
+
+}
+
 </style>
 </head>
 
