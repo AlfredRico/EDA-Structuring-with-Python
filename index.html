@@ -119,6 +119,119 @@ p { color: #cfcfcf; }
 
 </style>
 
+
+<style>
+
+/* ===== RESTORE HIERARCHY + TOGGLES ===== */
+
+/* SUBSECTION */
+.subsection {
+  margin-left: 10px;
+  border-left: 1px solid #2a2a2a;
+  padding-left: 10px;
+}
+
+/* HEADERS */
+.subsection-header,
+.summary-header {
+  cursor: pointer;
+  position: relative;
+}
+
+/* ARROWS */
+.subsection-header::before,
+.summary-header::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+}
+
+/* SUMMARY ARROW FIX */
+.summary-header {
+  padding-left: 48px;
+  color: #ffcc66;
+}
+
+.summary-header::before {
+  left: 20px;
+  transform: rotate(90deg);
+}
+
+.summary-header.collapsed::before {
+  transform: rotate(0deg);
+}
+
+/* SUMMARY TOGGLE FIX */
+.summary-content {
+  margin-left: 48px;
+  display: block;
+}
+
+.summary-header.collapsed + .summary-content {
+  display: none;
+}
+
+/* SUBSECTION COLLAPSE */
+.subsection.collapsed > .subsection-content {
+  display: none;
+}
+
+/* ===== CONTROLS FIX ===== */
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* GROUP LEFT SIDE */
+.controls button {
+  margin-right: 10px;
+}
+
+/* ===== BUTTON COLORS RESTORE ===== */
+button {
+  background: #2dd4bf;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #14b8a6;
+}
+
+/* ===== CODE BLOCK FIX (CRITICAL) ===== */
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+  box-sizing: border-box;
+  white-space: pre;
+}
+
+code {
+  word-break: break-word;
+}
+
+/* ===== DESKTOP TEXT SCALE FIX ===== */
+@media (min-width: 769px) {
+  body {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+}
+
+/* ===== MOBILE FIX ===== */
+@media (max-width: 768px) {
+  pre {
+    font-size: 0.8rem;
+    overflow-x: auto;
+  }
+}
+
+</style>
+
 </head>
 
 <body>
