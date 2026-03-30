@@ -407,6 +407,69 @@ function toggleMode() {
 
 </script>
 
+
+<style>
+
+/* ===== FULL SECTION COLLAPSE SYSTEM (MISSING PIECE) ===== */
+.section.collapsed > .collapsible-content {
+  display: none;
+}
+
+/* SECTION HEADERS CLICKABLE */
+.section > h2 {
+  cursor: pointer;
+  position: relative;
+}
+
+/* SECTION ARROWS */
+.section > h2::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  transform: rotate(90deg);
+}
+
+/* COLLAPSED STATE */
+.section.collapsed > h2::before {
+  transform: rotate(0deg);
+}
+
+/* REMOVE ARROW FROM OVERVIEW */
+#project-overview::before {
+  content: none !important;
+}
+
+</style>
+
+<script>
+
+/* ===== ENSURE TECHNICAL IMPLEMENTATION IS COLLAPSED ===== */
+document.addEventListener("DOMContentLoaded", () => {
+
+  document.querySelectorAll(".section").forEach(section => {
+    const header = section.querySelector(":scope > h2");
+
+    if (!header) return;
+
+    // Collapse everything except overview
+    if (header.id !== "project-overview") {
+      section.classList.add("collapsed");
+    }
+  });
+
+  // CLICK TO TOGGLE SECTION
+  document.querySelectorAll(".section > h2").forEach(h => {
+    if (h.id === "project-overview") return;
+
+    h.addEventListener("click", () => {
+      h.parentElement.classList.toggle("collapsed");
+    });
+  });
+
+});
+
+</script>
+
 </head>
 
 <body>
