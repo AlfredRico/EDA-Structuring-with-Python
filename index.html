@@ -545,6 +545,55 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </script>
 
+
+<style>
+
+/* ===== SCROLLABLE TABLE (SHOW ~10 ROWS) ===== */
+.scroll-box {
+  max-height: 320px;  /* ~10 rows */
+  overflow-y: auto;
+}
+
+/* CLEAN SCROLLBAR */
+.scroll-box::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroll-box::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+body.light-mode .scroll-box::-webkit-scrollbar-thumb {
+  background: #bbb;
+}
+
+</style>
+
+<script>
+
+/* ===== FIX SECTION CLICK (RELIABLE BINDING) ===== */
+document.addEventListener("DOMContentLoaded", () => {
+
+  // RE-BIND SECTION HEADERS CLEANLY
+  document.querySelectorAll(".section > h2").forEach(h => {
+
+    if (h.id === "project-overview") return;
+
+    // remove existing listeners by cloning
+    const newHeader = h.cloneNode(true);
+    h.parentNode.replaceChild(newHeader, h);
+
+    newHeader.addEventListener("click", () => {
+      newHeader.parentElement.classList.toggle("collapsed");
+    });
+
+  });
+
+});
+
+</script>
+
 </head>
 
 <body>
