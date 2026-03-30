@@ -232,6 +232,181 @@ code {
 
 </style>
 
+
+<style>
+
+/* ===== SUBSECTION HEADER (BLUE LIKE UNICORN) ===== */
+.subsection-header {
+  color: #9aaaff;
+  padding-left: 28px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  position: relative;
+}
+
+/* FIX ARROW POSITION (NO OVERLAP) */
+.subsection-header::before {
+  left: 0;
+}
+
+/* ===== SUMMARY (ALREADY GOOD BUT LOCK IT) ===== */
+.summary-header {
+  color: #ffcc66;
+}
+
+/* ===== VIEW CODE (TEAL) ===== */
+details summary {
+  color: #2dd4bf;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+details summary:hover {
+  color: #14b8a6;
+}
+
+/* ===== CONTROLS (RIGHT SIDE GROUPED) ===== */
+.controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ===== BUTTON STYLE ===== */
+button {
+  background: #2dd4bf;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #14b8a6;
+}
+
+/* ===== TABLE GRID SYSTEM (CRITICAL FIX) ===== */
+.data-table,
+.df-table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.data-table th,
+.data-table td,
+.df-table th,
+.df-table td {
+  border: 1px solid #333;
+  padding: 8px 10px;
+}
+
+.data-table th,
+.df-table th {
+  background: #222;
+}
+
+/* LIGHT MODE TABLE */
+body.light-mode .data-table th,
+body.light-mode .data-table td,
+body.light-mode .df-table th,
+body.light-mode .df-table td {
+  border: 1px solid #ddd;
+}
+
+body.light-mode .data-table th,
+body.light-mode .df-table th {
+  background: #eaeaea;
+}
+
+/* ===== GRAPH SAFETY ===== */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== DAY/NIGHT MODE FULL FIX ===== */
+body.light-mode {
+  background: #ffffff;
+  color: #111;
+}
+
+body.light-mode p {
+  color: #333;
+}
+
+body.light-mode h1,
+body.light-mode h2 {
+  color: #000;
+}
+
+body.light-mode .results {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+}
+
+body.light-mode details {
+  background: #fafafa;
+  border: 1px solid #ddd;
+}
+
+body.light-mode .subsection-header {
+  color: #2f5fd0;
+}
+
+body.light-mode .summary-header {
+  color: #cc8800;
+}
+
+body.light-mode details summary {
+  color: #0d9488;
+}
+
+/* ===== CODE BLOCK FIX ===== */
+pre {
+  max-width: 100%;
+  overflow-x: auto;
+  box-sizing: border-box;
+  white-space: pre;
+}
+
+</style>
+
+<script>
+
+/* ===== FORCE DEFAULT COLLAPSE (UNICORN BEHAVIOR) ===== */
+document.addEventListener("DOMContentLoaded", () => {
+
+  document.querySelectorAll(".section").forEach(section => {
+    const header = section.querySelector(":scope > h2");
+
+    if (!header) return;
+
+    // KEEP OVERVIEW OPEN, COLLAPSE EVERYTHING ELSE
+    if (header.id !== "project-overview") {
+      section.classList.add("collapsed");
+    }
+  });
+
+});
+
+/* ===== FIX DAY/NIGHT BUTTON TEXT ===== */
+function toggleMode() {
+  const body = document.body;
+  const btn = document.getElementById("modeBtn");
+
+  body.classList.toggle("light-mode");
+
+  if (body.classList.contains("light-mode")) {
+    btn.textContent = "Night Mode";
+  } else {
+    btn.textContent = "Day Mode";
+  }
+}
+
+</script>
+
 </head>
 
 <body>
