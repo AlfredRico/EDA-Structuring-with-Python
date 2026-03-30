@@ -470,6 +470,81 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </script>
 
+
+<style>
+
+/* ===== FIX: COLLAPSE WITHOUT BREAKING CLICK ===== */
+.section.collapsed > .collapsible-content {
+  display: none;
+}
+
+/* KEEP ARROWS WORKING */
+.section > h2 {
+  cursor: pointer;
+  position: relative;
+}
+
+.section > h2::before {
+  content: "▸";
+  position: absolute;
+  left: 0;
+  transform: rotate(90deg);
+}
+
+.section.collapsed > h2::before {
+  transform: rotate(0deg);
+}
+
+/* REMOVE OVERVIEW ARROW */
+#project-overview::before {
+  content: none !important;
+}
+
+/* ===== GRADIENT FIX FOR COUNTS COLUMN ===== */
+
+/* darkest */
+.g10 { background:#0b3c5d; color:#fff; }
+
+/* strong */
+.g9  { background:#145a7a; color:#fff; }
+
+/* medium */
+.g8  { background:#1f77a4; color:#fff; }
+
+/* lighter */
+.g7  { background:#3a8fb7; }
+
+/* soft */
+.g6  { background:#6baed6; }
+
+/* very soft */
+.g5  { background:#9ecae1; }
+
+/* faint */
+.g4  { background:#c6dbef; }
+
+</style>
+
+<script>
+
+/* ===== SAFE DEFAULT COLLAPSE (NO CLICK BREAK) ===== */
+document.addEventListener("DOMContentLoaded", () => {
+
+  document.querySelectorAll(".section").forEach(section => {
+    const header = section.querySelector(":scope > h2");
+
+    if (!header) return;
+
+    // Only set initial state — DO NOT override behavior
+    if (header.id !== "project-overview") {
+      section.classList.add("collapsed");
+    }
+  });
+
+});
+
+</script>
+
 </head>
 
 <body>
