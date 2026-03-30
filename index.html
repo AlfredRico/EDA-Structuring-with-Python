@@ -5,7 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>NOAA Lightning Stirke Analysis (EDA Structuring)</title>
 
+
+
 <style>
+
+/* ===== BASE ===== */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -28,14 +32,14 @@ h1 {
 }
 
 h2 {
-  font-size: 1.8rem;              /* stronger hierarchy */
-  margin-top: 55px;              /* more breathing room */
+  font-size: 1.8rem;
+  margin-top: 55px;
   margin-bottom: 10px;
   border-bottom: 1px solid #333;
   padding-left: 28px;
   position: relative;
-  font-weight: 600;              /* cleaner emphasis */
-  letter-spacing: 0.3px;         /* subtle polish */
+  font-weight: 600;
+  letter-spacing: 0.3px;
 }
 
 p { color: #cfcfcf; }
@@ -50,502 +54,71 @@ p { color: #cfcfcf; }
   border: 1px solid #2a2a2a;
 }
 
-details {
-  margin-top: 15px;
-  background: #151515;
-  border: 1px solid #2a2a2a;
-  border-radius: 8px;
-  padding: 10px;
-}
+/* ===== READABILITY SYSTEM (DO NOT TOUCH) ===== */
 
-summary { cursor: pointer; }
+/* DESKTOP */
+@media (min-width: 769px) {
 
-.controls {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 10px;
-}
+  body { line-height: 1.7; }
 
-/* COLLAPSE SYSTEM */
-.section.collapsed > .collapsible-content { display: none; }
-.subsection.collapsed > .subsection-content { display: none; }
-.subsection.collapsed > .subsection-summary { display: none; }
-
-/* HEADERS */
-.section > h2,
-.subsection-header,
-.summary-header {
-  cursor: pointer;
-  position: relative;
-}
-
-/* ARROWS */
-.section > h2::before,
-.subsection-header::before,
-.summary-header::before {
-  content: "▸";
-  position: absolute;
-  left: 0;
-}
-
-/* SIZE MATCHING */
-.subsection-header {
-  font-size: 1.3rem;                 /* slightly larger */
-  padding-left: 28px;
-  color: #9aaaff;                   /* clean blue accent */
-  font-weight: 600;                 /* stronger presence */
-  letter-spacing: 0.2px;            /* subtle polish */
-}
-
-.summary-header {
-  font-size: 1.15rem;
-  padding-left: 48px;  /* deeper indent than subsection */
-  color: #ffcc66;
-  line-height: 1.2;
-}
-
-/* SECTION ARROW */
-.section > h2::before { transform: rotate(90deg); }
-.section.collapsed > h2::before { transform: rotate(0deg); }
-
-/* REMOVE PROJECT OVERVIEW ARROW */
-#project-overview::before {
-  content: none !important;
-}
-
-.subsection {
-  margin-left: 10px;
-  border-left: 1px solid #2a2a2a;
-  padding-left: 10px;
-}
-
-/* SUMMARY ARROW */
-.summary-header::before {
-  content: "▸";
-  position: absolute;
-  left: 20px;  /* align with new indent */
-  font-size: 0.85rem;
-  top: 50%;
-  transform: translateY(-50%) rotate(90deg);
-}
-
-.summary-header.collapsed::before {
-  transform: translateY(-50%) rotate(0deg);
-}
-
-.summary-content {
-  display: block;
-  margin-left: 48px;
-}
-.summary-header.collapsed + .summary-content { display: none; }
-
-@media (min-width: 1024px) {
-  .container { max-width: 1200px; }
-  body { font-size: 18px; }
-}
-
-/* DAY MODE */
-body.light-mode {
-  background: #ffffff;
-  color: #111;
-}
-
-body.light-mode p {
-  color: #333;
-}
-
-body.light-mode h1,
-body.light-mode h2 {
-  color: #000;
-}
-
-body.light-mode .results {
-  background: #f4f4f4;
-  border: 1px solid #ddd;
-}
-
-body.light-mode details {
-  background: #fafafa;
-  border: 1px solid #ddd;
-}
-
-body.light-mode .subsection-header {
-  color: #2f5fd0;
-}
-
-body.light-mode .summary-header {
-  color: #cc8800;
-}
-
-body.light-mode a {
-  color: #2f5fd0;
-}
-
-
-/* =========================
-   TEAL UTILITY SYSTEM
-========================= */
-
-/* Back to Portfolio */
-.back-link {
-  color: #2dd4bf;
-  text-decoration: none;
-  font-size: 0.95rem;
-}
-
-.back-link:hover {
-  color: #14b8a6;
-}
-
-/* View Code */
-details summary {
-  color: #2dd4bf;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-details summary:hover {
-  color: #14b8a6;
-}
-
-/* LIGHT MODE ADJUSTMENT */
-body.light-mode .back-link,
-body.light-mode details summary {
-  color: #0d9488;
-}
-
-body.light-mode .back-link:hover,
-body.light-mode details summary:hover {
-  color: #0f766e;
-}
-
-/* Smooth transitions */
-.back-link,
-details summary {
-  transition: color 0.2s ease;
-}
-
-
-/* DATA TABLE */
-.data-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-  font-size: 0.95rem;
-}
-
-.data-table th,
-.data-table td {
-  border: 1px solid #2a2a2a;
-  padding: 8px 10px;
-  text-align: left;
-}
-
-.data-table th {
-  background: #222;
-  font-weight: 600;
-}
-
-.data-table tr:nth-child(even) {
-  background: #161616;
-}
-
-/* LIGHT MODE TABLE */
-body.light-mode .data-table th,
-body.light-mode .data-table td {
-  border: 1px solid #ddd;
-}
-
-body.light-mode .data-table th {
-  background: #eaeaea;
-}
-
-body.light-mode .data-table tr:nth-child(even) {
-  background: #f9f9f9;
-}
-
-
-/* GRADIENT SCALE */
-.g10 { background:#0b3c5d; color:#fff; }
-.g9  { background:#145a7a; color:#fff; }
-.g8  { background:#1f77a4; color:#fff; }
-.g7  { background:#3a8fb7; }
-.g6  { background:#6baed6; }
-
-
-/* SCROLLABLE RESULTS */
-.scroll-box {
-  max-height: 320px;
-  overflow-y: auto;
-}
-
-.scroll-box::-webkit-scrollbar {
-  width: 6px;
-}
-
-.scroll-box::-webkit-scrollbar-thumb {
-  background: #444;
-  border-radius: 4px;
-}
-
-body.light-mode .scroll-box::-webkit-scrollbar-thumb {
-  background: #bbb;
-}
-
-/* EXTENDED GRADIENT */
-.g5 { background:#9ecae1; }
-.g4 { background:#c6dbef; }
-
-
-/* =========================
-   DESKTOP READABILITY ONLY
-========================= */
-@media (min-width: 1024px) {
-
-  body {
+  p {
+    margin: 14px 0;
     line-height: 1.7;
   }
 
   .container {
-    max-width: 1000px;
+    max-width: 1200px;
+    padding: 50px 30px;
   }
 
-  h2 {
-    margin-top: 60px;
-    margin-bottom: 14px;
-  }
-
-  p {
-    margin-bottom: 14px;
-  }
-
-  .section {
-    margin-top: 40px;
-  }
+  .section { margin-top: 45px; }
 
   .results {
-    padding: 16px;
-    margin-top: 18px;
-  }
-
-  .data-table td,
-  .data-table th {
-    padding: 10px 12px;
-  }
-
-  pre {
-    padding: 12px;
-    line-height: 1.5;
-    overflow-x: auto;
-  }
-
-}
-
-
-/* =========================
-   MOBILE ONLY (ISOLATED)
-========================= */
-@media (max-width: 768px) {
-
-  body {
-    font-size: 15px;
-    line-height: 1.6;
-  }
-
-  .container {
-    padding: 20px 12px;
+    margin-top: 22px;
+    padding: 20px;
   }
 
   h1 {
-    font-size: 1.9rem;
+    margin-bottom: 16px;
+    line-height: 1.25;
   }
 
   h2 {
-    font-size: 1.3rem;
-    margin-top: 30px;
-    padding-left: 18px;
+    margin-top: 65px;
+    margin-bottom: 16px;
   }
-
-  .subsection-header {
-    font-size: 1.05rem;
-    padding-left: 18px;
-  }
-
-  .summary-header {
-    font-size: 0.95rem;
-    padding-left: 28px;
-  }
-
-  .summary-content {
-    margin-left: 28px;
-  }
-
-  /* Fix nesting drift */
-  .subsection {
-    margin-left: 0;
-    padding-left: 6px;
-    border-left: none;
-  }
-
-  /* IMPORTANT: DO NOT TOUCH CONTROLS */
-  /* No changes to .controls or buttons */
-
-  /* Table overflow fix */
-  .results {
-    overflow-x: auto;
-  }
-
-  .data-table {
-    min-width: 600px;
-    font-size: 0.85rem;
-  }
-
-  /* Images */
-  img {
-    width: 100% !important;
-    height: auto;
-  }
-
-  .results,
-  details {
-    padding: 10px;
-  }
-
 }
 
-
-/* UNIVERSAL CODE BLOCK SAFETY */
-pre {
-  max-width: 100%;
-  overflow-x: auto;
-  box-sizing: border-box;
-}
-
-code {
-  word-break: break-word;
-}
-
-
-@media (min-width: 1024px) {
-
-  body {
-    line-height: 1.7;
-  }
-
-  .container {
-    max-width: 1000px;
-  }
-
-  h2 {
-    margin-top: 60px;
-    margin-bottom: 14px;
-  }
-
-  p {
-    margin-bottom: 14px;
-  }
-
-  .section {
-    margin-top: 40px;
-  }
-
-  .results {
-    padding: 16px;
-    margin-top: 18px;
-  }
-
-  .data-table td,
-  .data-table th {
-    padding: 10px 12px;
-  }
-
-  /* CODE BLOCK FIX (DESKTOP) */
-  pre {
-    padding: 12px;
-    line-height: 1.5;
-    overflow-x: auto;
-    max-width: 100%;
-    box-sizing: border-box;
-    white-space: pre;
-  }
-
-}
-
-
+/* MOBILE */
 @media (max-width: 768px) {
 
   body {
-    font-size: 15px;
-    line-height: 1.6;
+    font-size: 16px;
+    line-height: 1.85;
+  }
+
+  p {
+    margin: 12px 0;
+    line-height: 1.85;
   }
 
   .container {
-    padding: 20px 12px;
+    padding: 24px 16px;
   }
 
   h1 {
-    font-size: 1.9rem;
+    font-size: 2.1rem;
+    line-height: 1.3;
   }
 
   h2 {
-    font-size: 1.3rem;
-    margin-top: 30px;
-    padding-left: 18px;
+    font-size: 1.45rem;
+    margin-top: 38px;
   }
-
-  .subsection-header {
-    font-size: 1.05rem;
-    padding-left: 18px;
-  }
-
-  .summary-header {
-    font-size: 0.95rem;
-    padding-left: 28px;
-  }
-
-  .summary-content {
-    margin-left: 28px;
-  }
-
-  .subsection {
-    margin-left: 0;
-    padding-left: 6px;
-    border-left: none;
-  }
-
-  /* DO NOT TOUCH CONTROLS */
-
-  .results {
-    overflow-x: auto;
-  }
-
-  .data-table {
-    min-width: 600px;
-    font-size: 0.85rem;
-  }
-
-  /* CODE BLOCK FIX (MOBILE) */
-  pre {
-    overflow-x: auto;
-    max-width: 100%;
-    box-sizing: border-box;
-    white-space: pre;
-    font-size: 0.8rem;
-  }
-
-  img {
-    width: 100% !important;
-    height: auto;
-  }
-
-  .results,
-  details {
-    padding: 10px;
-  }
-
 }
 
 </style>
+
 </head>
 
 <body>
