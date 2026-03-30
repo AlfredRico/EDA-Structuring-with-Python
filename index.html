@@ -597,7 +597,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <style>
 
-/* ===== BUTTON COLOR FIX (WHITE) ===== */
+/* ===== BUTTON COLOR FIX ===== */
 button {
   background: #ffffff !important;
   color: #111 !important;
@@ -608,7 +608,6 @@ button:hover {
   background: #e5e7eb !important;
 }
 
-/* dark mode adjust */
 body:not(.light-mode) button {
   background: #f5f5f5 !important;
   color: #111 !important;
@@ -623,32 +622,41 @@ body:not(.light-mode) button:hover {
 
 <style>
 
-/* ===== MOBILE BLEED FIX ===== */
-@media (max-width: 768px){
+/* ===== RESULTS TABLE SCROLL FIX ===== */
+.results {
+  overflow-x: auto;
+}
 
-  .results {
-    overflow-x: auto;
-    padding: 12px;
-  }
+/* keep table structure intact */
+.results table {
+  min-width: 600px;
+  width: max-content;
+  border-collapse: collapse;
+}
 
-  .results table {
-    width: 100%;
-    min-width: 100%;
-    table-layout: auto;
-    word-break: break-word;
-  }
+/* prevent text crushing */
+.results td,
+.results th {
+  white-space: nowrap;
+}
 
-  .results td, .results th {
-    word-break: break-word;
-    white-space: normal;
-  }
+/* smooth scroll (mobile) */
+.results {
+  -webkit-overflow-scrolling: touch;
+}
 
-  pre {
-    max-width: 100%;
-    overflow-x: auto;
-    white-space: pre;
-  }
+/* OPTIONAL: nicer scrollbar */
+.results::-webkit-scrollbar {
+  height: 6px;
+}
 
+.results::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+body.light-mode .results::-webkit-scrollbar-thumb {
+  background: #bbb;
 }
 
 </style>
